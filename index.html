@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/jquery-1.7.1.min.js"></script>
+    <title>slide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            line-height: 1;
+            color: #000;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .wrap_photo {
+            margin: 0 auto;
+            width: 1055px;
+        }
+        
+        .photo_slide {
+            position: relative;
+            padding: 0 40px;
+        }
+        
+        .photo_slide .wrap_photo_list {
+            overflow: hidden;
+            position: relative;
+            width: 975px;
+            height: 64px;
+        }
+        
+        .photo_slide .wrap_photo_list ul {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .photo_slide .wrap_photo_list ul:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        
+        .photo_slide .wrap_photo_list ul li {
+            float: left;
+            width: 65px;
+            height: 64px;
+        }
+        
+        .photo_slide .wrap_photo_list ul li a {
+            display: block;
+            position: relative;
+        }
+        
+        .photo_slide .wrap_photo_list ul li.on a:after {
+            content: '';
+            display: block;
+            position: absolute;
+            box-sizing: border-box;
+            top: 0;
+            left: 0;
+            width: 65px;
+            height: 64px;
+            border: 2px solid red;
+        }
+        
+        .photo_slide .wrap_photo_list ul li a img {
+            width: 64px;
+            height: 64px;
+        }
+        
+        .photo_slide .prev_btn {
+            position: absolute;
+            top: 10px;
+            left: 0;
+        }
+        
+        .photo_slide .next_btn {
+            position: absolute;
+            top: 10px;
+            right: 0;
+        }
+        
+        .photo_article {
+            margin-top: 20px;
+        }
+        
+        .photo_article .photo_view {
+            text-align: center;
+            position: relative;
+        }
+        
+        .photo_article .photo_view .wrap_view a img {
+            width: 650px;
+        }
+        
+        .photo_article .photo_view .prev_btn {
+            position: absolute;
+            top: 50px;
+            left: 0;
+        }
+        
+        .photo_article .photo_view .next_btn {
+            position: absolute;
+            top: 50px;
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap_photo">
+        <div class="photo_slide">
+            <div class="wrap_photo_list">
+                <ul>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_01.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_02.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_03.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_04.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_05.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_01.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_02.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_03.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_04.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_05.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_01.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_02.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_03.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_04.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_05.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_01.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_02.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_03.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_04.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_05.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_01.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_02.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_03.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_04.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_05.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_01.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_02.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_03.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_04.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_05.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_01.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_02.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_03.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_04.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_05.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_01.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_02.png" alt=""></a>
+                    </li>
+
+                    <!-- <li>
+                        <a href="#n"><img src="./img/sample/img_03.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_04.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_05.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_01.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_02.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_03.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_04.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#n"><img src="./img/sample/img_05.png" alt=""></a>
+                    </li> -->
+                </ul>
+            </div>
+
+            <a href="#n" class="prev_btn">이전</a>
+            <a href="#n" class="next_btn">다음</a>
+        </div>
+
+        <div class="photo_article">
+            <div class="photo_view">
+                <div class="wrap_view">
+                    <a href="#n">
+                        <img src="" alt="">
+                    </a>
+                </div>
+                <a href="#n" class="prev_btn">이전</a>
+                <a href="#n" class="next_btn">다음</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        $(function() {
+
+            var ZumPhotoSlide = function() {
+                var $photo_slide = $('.photo_slide');
+                var $wrap_photo_list = $photo_slide.find('.wrap_photo_list');
+                var $list = $wrap_photo_list.find('ul');
+                var $item = $list.find('li');
+
+                var $photo_view = $('.photo_view');
+                var $wrap_view = $photo_view.find('.wrap_view');
+                var $photo_view_img = $wrap_view.find('img');
+
+                var NUM_OF_ITEM_SHOWN = 15; // 노출되는 아이템의 갯수
+
+                var center_index = Math.floor(NUM_OF_ITEM_SHOWN / 2);
+                // console.log(center_index)
+
+
+                var index_select_item = 0; // 선택된 아이템의 인덱스 번호
+
+                var num_item = $list.children().length;
+                console.log("total =  " + num_item)
+                var width_item = parseInt($item.width());
+                var width_list = width_item * num_item;
+                var width_list_shown = NUM_OF_ITEM_SHOWN * width_item; // 노출되는 리스트의 길이
+
+                var num_item_group = Math.floor(num_item / NUM_OF_ITEM_SHOWN); // 노출되는 하나의 리스트 아이템 그룹
+                var num_item_group_rest = num_item % NUM_OF_ITEM_SHOWN;
+
+                // var index_current_item_group = 0; // 현재 노출되는 리스트 아이템 그룹의 인덱스
+
+                /* init */
+                $list.css('width', width_list);
+
+                // var current_list_left = 0;
+
+                /*
+                    절대값
+                    prev
+                    1. current_list_left < width_list_shown,  if current_list_left < 960  -(960 - current_list_left) left 이동
+                    2. current_list_left > width_list_shown,  -width_list_shown left 이동
+                    3. current_list_left === 0, return
+
+                    next
+                    1. current_list_left < width_list_shown
+                
+                */
+
+                var start_left_pos = 0; // left position 시작점
+                // var end_left_pos = -((num_item_group - 1) * width_list_shown); // left position 끝점
+                var end_left_pos = -(((num_item_group - 1) * width_list_shown) + (num_item_group_rest * width_item)); // left position 끝점
+                console.log(end_left_pos)
+
+                $photo_slide.find('.prev_btn').click(function() {
+                    // if (index_current_item_group === 0) {
+                    //     return
+                    // };
+                    // index_current_item_group--;
+
+                    // current_list_left += width_list_shown;
+                    // $list.stop().animate({
+                    //     left: current_list_left
+                    // });
+
+                    var list_left_pos = $list.position().left;
+
+                    // if (list_left_pos === 0) {
+                    //     return;
+                    // } else if (list_left_pos < -(width_list_shown)) {
+                    //     list_left_pos = list_left_pos + width_list_shown;
+                    //     $list.stop().animate({
+                    //         left: list_left_pos
+                    //     });
+                    // } else if (list_left_pos < 0 && list_left_pos >= -(width_list_shown)) {
+                    //     list_left_pos = -(list_left_pos);
+                    //     $list.stop().animate({
+                    //         left: list_left_pos
+                    //     });
+                    // }
+                    if (list_left_pos === 0) {
+                        console.log("start");
+                        return;
+                    }
+
+                    list_left_pos = list_left_pos + width_list_shown;
+                    $list.stop().animate({
+                        left: list_left_pos
+                    });
+                });
+
+                $photo_slide.find('.next_btn').click(function() {
+                    // if (index_current_item_group >= num_item_group - 1) {
+                    //     return;
+                    // }
+                    // index_current_item_group++;
+
+                    // current_list_left -= width_list_shown;
+                    // $list.stop().animate({
+                    //     left: current_list_left
+                    // });
+
+
+                    var list_left_pos = $list.position().left;
+
+                    // if (list_left_pos === -((num_item_group - 1) * width_list_shown)) {
+                    //     console.log("!")
+                    //     return;
+                    // } else if (list_left_pos > -((num_item_group - 1) * width_list_shown) && list_left_pos < -((num_item_group - 2) * width_list_shown)) {
+                    //     console.log("d")
+
+                    //     list_left_pos = -((num_item_group - 1) * width_list_shown) - list_left_pos;
+
+                    //     $list.stop().animate({
+                    //         left: list_left_pos
+                    //     });
+                    // } else if (list_left_pos > -((num_item_group - 2) * width_list_shown)) {
+                    //     console.log("c")
+
+                    //     list_left_pos = list_left_pos + width_list_shown;
+                    //     $list.stop().animate({
+                    //         left: list_left_pos
+                    //     });
+                    // }
+
+                    // if (Math.abs(end_left_pos - list_left_pos) >= width_list_shown) {
+                    //     list_left_pos = list_left_pos - width_list_shown;
+                    //     $list.stop().animate({
+                    //         left: list_left_pos
+                    //     });
+                    // }
+                    if (list_left_pos === end_left_pos) {
+                        console.log("end")
+                        return;
+                    }
+
+                    list_left_pos = list_left_pos - width_list_shown;
+                    $list.stop().animate({
+                        left: list_left_pos
+                    });
+                });
+
+                $list.click(function(e) {
+                    var target = e.target;
+                    var clicked_item = target.closest('li');
+                    index_select_item = $item.index(clicked_item);
+                    showPhotoView(index_select_item);
+                    highlightItem(index_select_item);
+                });
+
+                /*
+                    옵션값으로 선택된 이미지의 인덱스값을 설정할수 있다.
+                    
+                    함수-1
+                    1. 리스트에서 선택된 리스트의 인덱스 번호를 가져온다
+                    2. 인덱스 번호의 이미지의 URL 값을 가져온다
+                    3. .wrap_view a img의 URL을 값을 가져온 값으로 변경한다.
+
+                    4. 다음 버튼을 누르면 함수-1에 인수로 인덱스 + 1의 값을 넣어준다.
+                    5. 이전 버튼을 누르면 함수-1에 인수로 인덱스 - 1의 값을 넣어준다.
+                */
+
+                function showPhotoView(index) {
+                    var select_item = $item.eq(index);
+                    var img_src = select_item.find('img').attr('src');
+                    $photo_view_img.attr('src', img_src);
+                }
+
+                showPhotoView(index_select_item);
+
+                $photo_view.find('.prev_btn').click(function() {
+                    if (index_select_item === 0) {
+                        return;
+                    }
+
+                    index_select_item--;
+                    showPhotoView(index_select_item);
+                    highlightItem(index_select_item);
+
+                    if (index_select_item >= center_index && index_select_item < (num_item - center_index - 1)) {
+                        $list.stop().animate({
+                            left: -((index_select_item - center_index) * width_item)
+                        });
+
+                    } else if (index_select_item > (num_item - center_index - 1)) {
+                        $list.stop().animate({
+                            left: end_left_pos
+                        });
+                    } else if (index_select_item <= center_index) {
+                        $list.stop().animate({
+                            left: 0
+                        });
+                    }
+                });
+
+
+                $photo_view.find('.next_btn').click(function() {
+                    if (index_select_item >= num_item - 1) {
+                        return;
+                    }
+
+                    index_select_item++;
+                    showPhotoView(index_select_item);
+                    highlightItem(index_select_item);
+
+                    if (index_select_item > center_index && index_select_item < (num_item - center_index)) {
+                        $list.stop().animate({
+                            left: -((index_select_item - center_index) * width_item)
+                        });
+                    } else if (index_select_item < center_index) {
+                        $list.stop().animate({
+                            left: 0
+                        });
+                    } else if (index_select_item > (num_item - center_index)) {
+                        $list.stop().animate({
+                            left: end_left_pos
+                        });
+                    }
+                });
+
+                function highlightItem(index) {
+                    $item.removeClass('on');
+                    $item.eq(index).addClass('on');
+                }
+
+                highlightItem(index_select_item);
+
+                /*
+
+                1. 가운데 고정값을 정한다.
+                2. 인덱스 < 고정값,
+                3. 고정값 < 인덱스, 다음 버튼을 누르면 가운데 고정(아이템 너비 만큼만 전체 리스트가 이동한다.)
+                4. (아이템 총갯수 - 고정값) < 인덱스, 원래대로
+
+                */
+
+            }
+
+            ZumPhotoSlide();
+        });
+    </script>
+</body>
+
+</html>
