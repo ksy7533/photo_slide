@@ -15,6 +15,10 @@
             color: #000;
         }
         
+        img {
+            border: 0;
+        }
+        
         ul {
             list-style: none;
         }
@@ -57,6 +61,7 @@
         .photo_slide .wrap_photo_list ul li a {
             display: block;
             position: relative;
+            width: 64px;
         }
         
         .photo_slide .wrap_photo_list ul li.on a:after {
@@ -66,12 +71,13 @@
             box-sizing: border-box;
             top: 0;
             left: 0;
-            width: 65px;
+            width: 64px;
             height: 64px;
             border: 2px solid red;
         }
         
         .photo_slide .wrap_photo_list ul li a img {
+            display: block;
             width: 64px;
             height: 64px;
         }
@@ -222,7 +228,7 @@
                     <li>
                         <a href="#n"><img src="./img/sample/img_04.png" alt=""></a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="#n"><img src="./img/sample/img_05.png" alt=""></a>
                     </li>
                     <li>
@@ -254,7 +260,7 @@
                     </li>
                     <li>
                         <a href="#n"><img src="./img/sample/img_05.png" alt=""></a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
 
@@ -319,7 +325,23 @@
                 var start_left_pos = 0; // left position 시작점
                 var end_left_pos = -(((num_item_group - 1) * width_list_shown) + (num_item_group_rest * width_item)); // left position 끝점
 
+                var isSlideListComplete = true;
+                var isSlideItemComplete = true;
+
+                function moveListOfSlide(list_left_pos) {
+                    isSlideListComplete = false;
+                    $list.stop().animate({
+                        left: list_left_pos
+                    }, function() {
+                        isSlideListComplete = true;
+                    });
+                }
+
                 $photo_slide.find('.prev_btn').click(function() {
+                    if (!isSlideListComplete) {
+                        return;
+                    }
+
                     var list_left_pos = $list.position().left;
 
                     if (list_left_pos === 0) {
@@ -332,12 +354,14 @@
                         list_left_pos = 0;
                     }
 
-                    $list.stop().animate({
-                        left: list_left_pos
-                    });
+                    moveListOfSlide(list_left_pos);
                 });
 
                 $photo_slide.find('.next_btn').click(function() {
+                    if (!isSlideListComplete) {
+                        return;
+                    }
+
                     var list_left_pos = $list.position().left;
 
                     if (list_left_pos <= end_left_pos) {
@@ -350,14 +374,21 @@
                         list_left_pos = end_left_pos;
                     }
 
-                    $list.stop().animate({
-                        left: list_left_pos
-                    });
+                    moveListOfSlide(list_left_pos);
                 });
 
                 $list.click(function(e) {
-                    var target = e.target;
+                    var target = $(e.target);
                     var clicked_item = target.closest('li');
+
+                    if (clicked_item.prop('tagName') !== 'LI') {
+                        return;
+                    }
+
+                    if (!isSlideItemComplete) {
+                        return;
+                    }
+
                     index_select_item = $item.index(clicked_item);
                     showPhotoView(index_select_item);
                     highlightItem(index_select_item);
@@ -384,17 +415,24 @@
 
                 function moveItemOfSlide() {
                     if (index_select_item > center_index && index_select_item < (num_item - center_index)) {
+                        isSlideItemComplete = false;
                         $list.stop().animate({
                             left: -((index_select_item - center_index) * width_item)
-                        });
+                        }, 300, _afterAnimate);
                     } else if (index_select_item < center_index) {
+                        isSlideItemComplete = false;
                         $list.stop().animate({
                             left: 0
-                        });
+                        }, 300, _afterAnimate);
                     } else if (index_select_item > (num_item - center_index)) {
+                        isSlideItemComplete = false;
                         $list.stop().animate({
                             left: end_left_pos
-                        });
+                        }, 300, _afterAnimate);
+                    }
+
+                    function _afterAnimate() {
+                        isSlideItemComplete = true;
                     }
                 }
 
