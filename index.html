@@ -231,8 +231,7 @@
                     <li>
                         <a href="#n"><img src="./img/sample/img_02.png" alt=""></a>
                     </li>
-
-                    <!-- <li>
+                    <li>
                         <a href="#n"><img src="./img/sample/img_03.png" alt=""></a>
                     </li>
                     <li>
@@ -255,7 +254,7 @@
                     </li>
                     <li>
                         <a href="#n"><img src="./img/sample/img_05.png" alt=""></a>
-                    </li> -->
+                    </li>
                 </ul>
             </div>
 
@@ -286,34 +285,24 @@
                 var $wrap_photo_list = $photo_slide.find('.wrap_photo_list');
                 var $list = $wrap_photo_list.find('ul');
                 var $item = $list.find('li');
-
                 var $photo_view = $('.photo_view');
                 var $wrap_view = $photo_view.find('.wrap_view');
                 var $photo_view_img = $wrap_view.find('img');
 
                 var NUM_OF_ITEM_SHOWN = 15; // 노출되는 아이템의 갯수
 
-                var center_index = Math.floor(NUM_OF_ITEM_SHOWN / 2);
-                // console.log(center_index)
-
-
                 var index_select_item = 0; // 선택된 아이템의 인덱스 번호
 
+                var center_index = Math.floor(NUM_OF_ITEM_SHOWN / 2);
                 var num_item = $list.children().length;
-                console.log("total =  " + num_item)
                 var width_item = parseInt($item.width());
                 var width_list = width_item * num_item;
                 var width_list_shown = NUM_OF_ITEM_SHOWN * width_item; // 노출되는 리스트의 길이
-
                 var num_item_group = Math.floor(num_item / NUM_OF_ITEM_SHOWN); // 노출되는 하나의 리스트 아이템 그룹
                 var num_item_group_rest = num_item % NUM_OF_ITEM_SHOWN;
 
-                // var index_current_item_group = 0; // 현재 노출되는 리스트 아이템 그룹의 인덱스
-
                 /* init */
                 $list.css('width', width_list);
-
-                // var current_list_left = 0;
 
                 /*
                     절대값
@@ -328,93 +317,39 @@
                 */
 
                 var start_left_pos = 0; // left position 시작점
-                // var end_left_pos = -((num_item_group - 1) * width_list_shown); // left position 끝점
                 var end_left_pos = -(((num_item_group - 1) * width_list_shown) + (num_item_group_rest * width_item)); // left position 끝점
-                console.log(end_left_pos)
 
                 $photo_slide.find('.prev_btn').click(function() {
-                    // if (index_current_item_group === 0) {
-                    //     return
-                    // };
-                    // index_current_item_group--;
-
-                    // current_list_left += width_list_shown;
-                    // $list.stop().animate({
-                    //     left: current_list_left
-                    // });
-
                     var list_left_pos = $list.position().left;
 
-                    // if (list_left_pos === 0) {
-                    //     return;
-                    // } else if (list_left_pos < -(width_list_shown)) {
-                    //     list_left_pos = list_left_pos + width_list_shown;
-                    //     $list.stop().animate({
-                    //         left: list_left_pos
-                    //     });
-                    // } else if (list_left_pos < 0 && list_left_pos >= -(width_list_shown)) {
-                    //     list_left_pos = -(list_left_pos);
-                    //     $list.stop().animate({
-                    //         left: list_left_pos
-                    //     });
-                    // }
                     if (list_left_pos === 0) {
-                        console.log("start");
                         return;
                     }
 
-                    list_left_pos = list_left_pos + width_list_shown;
+                    if (list_left_pos + width_list_shown <= 0) {
+                        list_left_pos = list_left_pos + width_list_shown;
+                    } else {
+                        list_left_pos = 0;
+                    }
+
                     $list.stop().animate({
                         left: list_left_pos
                     });
                 });
 
                 $photo_slide.find('.next_btn').click(function() {
-                    // if (index_current_item_group >= num_item_group - 1) {
-                    //     return;
-                    // }
-                    // index_current_item_group++;
-
-                    // current_list_left -= width_list_shown;
-                    // $list.stop().animate({
-                    //     left: current_list_left
-                    // });
-
-
                     var list_left_pos = $list.position().left;
 
-                    // if (list_left_pos === -((num_item_group - 1) * width_list_shown)) {
-                    //     console.log("!")
-                    //     return;
-                    // } else if (list_left_pos > -((num_item_group - 1) * width_list_shown) && list_left_pos < -((num_item_group - 2) * width_list_shown)) {
-                    //     console.log("d")
-
-                    //     list_left_pos = -((num_item_group - 1) * width_list_shown) - list_left_pos;
-
-                    //     $list.stop().animate({
-                    //         left: list_left_pos
-                    //     });
-                    // } else if (list_left_pos > -((num_item_group - 2) * width_list_shown)) {
-                    //     console.log("c")
-
-                    //     list_left_pos = list_left_pos + width_list_shown;
-                    //     $list.stop().animate({
-                    //         left: list_left_pos
-                    //     });
-                    // }
-
-                    // if (Math.abs(end_left_pos - list_left_pos) >= width_list_shown) {
-                    //     list_left_pos = list_left_pos - width_list_shown;
-                    //     $list.stop().animate({
-                    //         left: list_left_pos
-                    //     });
-                    // }
-                    if (list_left_pos === end_left_pos) {
-                        console.log("end")
+                    if (list_left_pos <= end_left_pos) {
                         return;
                     }
 
-                    list_left_pos = list_left_pos - width_list_shown;
+                    if ((Math.abs(end_left_pos) - (width_list_shown + Math.abs(list_left_pos))) >= 0) {
+                        list_left_pos = list_left_pos - width_list_shown;
+                    } else {
+                        list_left_pos = end_left_pos;
+                    }
+
                     $list.stop().animate({
                         left: list_left_pos
                     });
@@ -426,6 +361,7 @@
                     index_select_item = $item.index(clicked_item);
                     showPhotoView(index_select_item);
                     highlightItem(index_select_item);
+                    moveItemOfSlide();
                 });
 
                 /*
@@ -446,43 +382,7 @@
                     $photo_view_img.attr('src', img_src);
                 }
 
-                showPhotoView(index_select_item);
-
-                $photo_view.find('.prev_btn').click(function() {
-                    if (index_select_item === 0) {
-                        return;
-                    }
-
-                    index_select_item--;
-                    showPhotoView(index_select_item);
-                    highlightItem(index_select_item);
-
-                    if (index_select_item >= center_index && index_select_item < (num_item - center_index - 1)) {
-                        $list.stop().animate({
-                            left: -((index_select_item - center_index) * width_item)
-                        });
-
-                    } else if (index_select_item > (num_item - center_index - 1)) {
-                        $list.stop().animate({
-                            left: end_left_pos
-                        });
-                    } else if (index_select_item <= center_index) {
-                        $list.stop().animate({
-                            left: 0
-                        });
-                    }
-                });
-
-
-                $photo_view.find('.next_btn').click(function() {
-                    if (index_select_item >= num_item - 1) {
-                        return;
-                    }
-
-                    index_select_item++;
-                    showPhotoView(index_select_item);
-                    highlightItem(index_select_item);
-
+                function moveItemOfSlide() {
                     if (index_select_item > center_index && index_select_item < (num_item - center_index)) {
                         $list.stop().animate({
                             left: -((index_select_item - center_index) * width_item)
@@ -496,6 +396,29 @@
                             left: end_left_pos
                         });
                     }
+                }
+
+                showPhotoView(index_select_item);
+
+                $photo_view.find('.prev_btn').click(function() {
+                    if (index_select_item === 0) {
+                        return;
+                    }
+                    index_select_item--;
+                    showPhotoView(index_select_item);
+                    highlightItem(index_select_item);
+                    moveItemOfSlide();
+                });
+
+
+                $photo_view.find('.next_btn').click(function() {
+                    if (index_select_item >= num_item - 1) {
+                        return;
+                    }
+                    index_select_item++;
+                    showPhotoView(index_select_item);
+                    highlightItem(index_select_item);
+                    moveItemOfSlide();
                 });
 
                 function highlightItem(index) {
@@ -507,10 +430,10 @@
 
                 /*
 
-                1. 가운데 고정값을 정한다.
-                2. 인덱스 < 고정값,
-                3. 고정값 < 인덱스, 다음 버튼을 누르면 가운데 고정(아이템 너비 만큼만 전체 리스트가 이동한다.)
-                4. (아이템 총갯수 - 고정값) < 인덱스, 원래대로
+                    1. 가운데 고정값을 정한다.
+                    2. 인덱스 < 고정값,
+                    3. 고정값 < 인덱스, 다음 버튼을 누르면 가운데 고정(아이템 너비 만큼만 전체 리스트가 이동한다.)
+                    4. (아이템 총갯수 - 고정값) < 인덱스, 원래대로
 
                 */
 
