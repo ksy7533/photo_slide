@@ -148,6 +148,10 @@
             <button id="btn_stop_auto_slide">자동재생중지</button>
         </span>
 
+        <p class="page">
+            <span id="current_number"></span> / <span id="total_number"></span>
+        </p>
+
         <div class="photo_slide">
             <div class="wrap_photo_list">
                 <ul>
@@ -357,6 +361,18 @@
                 togglePhotoSlideButton();
                 showPhotoView();
                 highlightItem();
+                renderCurrentPageNumber();
+                renderTotalPageNumber();
+
+                function renderCurrentPageNumber() {
+                    var $current_number = $('#current_number');
+                    $current_number.text(index_select_item + 1);
+                }
+
+                function renderTotalPageNumber() {
+                    var $total_number = $('#total_number');
+                    $total_number.text(num_item);
+                }
 
                 function moveListOfSlide(list_left_pos) {
                     isSlideListComplete = false;
@@ -437,25 +453,27 @@
                 }
 
                 function moveItemOfSlide() {
-                    var DURATION = 300;
+                    var _DURATION = 300;
                     showPhotoView();
                     highlightItem();
                     togglePhotoViewButton();
+                    renderCurrentPageNumber();
+
                     if (index_select_item >= center_index && index_select_item < (num_item - center_index)) {
                         isSlideItemComplete = false;
                         $list.stop().animate({
                             left: -((index_select_item - center_index) * width_item)
-                        }, DURATION, _afterAnimate);
+                        }, _DURATION, _afterAnimate);
                     } else if (index_select_item < center_index) {
                         isSlideItemComplete = false;
                         $list.stop().animate({
                             left: 0
-                        }, DURATION, _afterAnimate);
+                        }, _DURATION, _afterAnimate);
                     } else if (index_select_item > (num_item - center_index - 1)) {
                         isSlideItemComplete = false;
                         $list.stop().animate({
                             left: end_left_pos
-                        }, DURATION, _afterAnimate);
+                        }, _DURATION, _afterAnimate);
                     }
 
                     function _afterAnimate() {
